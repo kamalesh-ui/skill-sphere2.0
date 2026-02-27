@@ -1,0 +1,34 @@
+# Exported from Render on 2026-02-22T14:54:26Z
+version: "1"
+projects:
+- name: My project
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: chatbot
+      runtime: python
+      repo: https://github.com/kamalesh-ui/chatbot
+      plan: free
+      region: oregon
+      buildCommand: pip install -r requirements.txt
+      startCommand: gunicorn -k uvicorn.workers.UvicornWorker main:app
+      autoDeployTrigger: commit
+    - type: web
+      name: chatbot-1
+      runtime: python
+      repo: https://github.com/kamalesh-ui/chatbot
+      plan: free
+      region: oregon
+      buildCommand: pip install -r requirements.txt
+      startCommand: gunicorn app:app
+      autoDeployTrigger: commit
+    - type: web
+      name: chatbot-2
+      runtime: python
+      repo: https://github.com/kamalesh-ui/chatbot
+      plan: free
+      region: oregon
+      buildCommand: pip install -r requirements.txt
+      startCommand: gunicorn app:app
+      autoDeployTrigger: commit
